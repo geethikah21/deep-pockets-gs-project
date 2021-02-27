@@ -1,0 +1,43 @@
+
+public class LinearRegression {
+    private final double intercept, slope;
+    double[] previousdata= new double[]{2011,2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020};;
+    double[] newyears = new double[]{2021,2022,2023,2024,2025,2026,2027,2028,2029,2030};
+     /**
+     * Performs a linear regression on the data points {@code (y[i], x[i])}.
+     */
+    public double[] LinearRegression(double[] x, double[] y) {
+        if (x.length != y.length) {
+            throw new IllegalArgumentException("array lengths are not equal");
+        }
+        int n = x.length;
+        double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
+        for (int i = 0; i < n; i++) {
+            sumx  += x[i];
+            sumx2 += x[i]*x[i];
+            sumy  += y[i];
+        }
+        double xbar = sumx / n;
+        double ybar = sumy / n;
+        double xxbar = 0.0, yybar = 0.0, xybar = 0.0;
+        for (int i = 0; i < n; i++) {
+            xxbar += (x[i] - xbar) * (x[i] - xbar);
+            xybar += (x[i] - xbar) * (y[i] - ybar);
+        }
+        slope  = xybar / xxbar;
+        intercept = ybar - slope * xbar;
+        double[] eq= new double[1];
+        eq[0]=slope;
+        eq[1]=intercept;
+        return eq[];
+        
+    }
+   public double[] Forcaster(double[] eq){
+       double[] forcastedvalues = new double[9];
+       for (int i = 0; i < 9; i++){
+           forcastedvalues[i] = (eq[0]*newdata[i] + eq[1]);
+        }
+       return forcastedvalues[];
+       
+    }
+}
