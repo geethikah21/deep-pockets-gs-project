@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.DoubleStream;
 
 @Service
 @Slf4j
@@ -47,25 +47,60 @@ public class InvestingForecastService {
 
     public List<Double> getForeCast(Map<String, Double> userRequest, List<InvestmentDetail> details) {
         Map<Integer, Double> totalYearAmount = new HashMap<>();
+
         for (InvestmentDetail i : details) {
             //user input for category i
             double userInvestmentPercentage = userRequest.get(i.getCategory());
             double userInvestmentDollars = (userInvestmentPercentage / 100) * 10000;
+            double[] historicalReturns = double[10];
             for (int x = 0; x < 10; x++) {
 
                 //historical interest data for category i in year x
                 double historicalInterest = Double.valueOf(i.getData().get(x));
-                double currentInterest = (historicalInterest / 100) * userInvestmentDollars;
+                historicalReturns[x] = historicalInterest;
 
-                userInvestmentDollars = userInvestmentDollars + currentInterest;
-
-                Double currentYearTotal = totalYearAmount.getOrDefault(x, 0.0);
-                //add total amount for category i in year x in Map<Integer, Double> totalYearAmount
-                //continuously sum total for each investment i in year x
-                totalYearAmount.put(x, currentYearTotal + userInvestmentDollars);
             }
+                //get predicted returns based on moving average for past 10 years
+                ArrayList<Double> predictedReturns = movingAveragePrediction(historicalReturns);
+                for(int i = 0; i < 10; i++){
+                    double currentInterest = (predictedReturns.get(i) / 100) * userInvestmentDollars;
+                    userInvestmentDollars = userInvestmentDollars + currentInterest;
+
+                    Double currentYearTotal = totalYearAmount.getOrDefault(i, 0.0);
+                    //add total amount for category i in year x in Map<Integer, Double> totalYearAmount
+                    //continuously sum total for each investment i in year x
+                    totalYearAmount.put(i, currentYearTotal + userInvestmentDollars);
+                }
+                
+
+               
+
         }
         return new ArrayList<>(totalYearAmount.values());
     }
+
+
+    public List<Double> movingAveragePrediction(double[] historicalReturns) {
+        ArrayList<Double> predictedReturns = new ArrayList<Double>();
+        int length = historicalReturns.length;
+        double currentSum = DoubleStream.of(historicalReturns).sum();
+        double currentAvg = currentSum/length;
+        double lastPredicted = 0;
+        //calculates moving average of past 10 years
+        for(int i=0; i < length; i++){
+            lastPredicted = currentAvg;
+            predictedReturns.add(lastPredicted);
+            currentSum = currentAvg * length;
+            currentSum -= historicalReturns[i];
+            currentSum += lastPredicted;
+            currentAvg = currentSum/length;
+        }
+
+        return predictedReturns;
+    }
+
+
 }
+
+
 
