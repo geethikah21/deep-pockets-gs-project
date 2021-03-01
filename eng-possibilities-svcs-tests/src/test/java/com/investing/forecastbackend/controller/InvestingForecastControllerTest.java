@@ -51,7 +51,7 @@ class InvestingForecastControllerTest {
     }
 
     @Test
-    void getForcastTest() throws Exception {
+    void getForecastTest() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
         Map<String, Double> userRequest = new HashMap<>();
@@ -74,7 +74,7 @@ class InvestingForecastControllerTest {
                 .getResponse()
                 .getContentAsString();
 
-        Assert.isTrue(response.contains("11532.0,12289.49,14652.39876,16089.652648700001,16786.331016873,20501.637810853892,26464.97452638016,29953.72526338663,36323.79856502394,40275.31320184977"), "Successfully Calculated Forecast");
+        Assert.isTrue(response.contains("11506.731000000002,13260.976289187,15428.083018646988,17959.798245707985,21077.313512531255,25041.747080053556,29787.470586061496,34998.87920949637,41382.38106095218,48824.9268532954"), "Successfully Calculated Forecast");
 
     }
 }
