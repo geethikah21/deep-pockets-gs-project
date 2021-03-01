@@ -1,0 +1,14 @@
+.table-section{
+    height: 100%;
+    flex-grow: 1;
+}
+
+.table-input{
+    flex-basis: 20%;
+}
+
+.data-table{
+    display: flex; 
+    flex-direction: row;
+
+}

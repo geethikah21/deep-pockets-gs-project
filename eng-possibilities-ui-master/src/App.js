@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 
 import NavBar from "./components/NavBar";
 import ForecasterHome from './pages/Forecaster'
+import DataTable from './components/Table/datatable'
 
 import "./App.css";
 
@@ -13,6 +14,7 @@ function App() {
         <Container fluid>
          <ForecasterHome/>
         </Container>
+        <DataTable/>
       </Container>
     </div>
   );
