@@ -1,6 +1,6 @@
-// import React from "react";
+import React from "react";
 
-// import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
+import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
 
 export const LineGraph = (props) => {
   const data = props.data.map((value, index) => {
@@ -9,7 +9,7 @@ export const LineGraph = (props) => {
       value
     }
   });
-  console.log(data);
+
   return (
     <>
       <LineChart width={400} height={400} data={data}>
