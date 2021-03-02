@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import NavBar from "./components/NavBar";
 import ForecasterHome from './pages/Forecaster'
 import DataTable from './components/Table/datatable'
-
+import AllocationContext from './AllocationContext'
 import "./App.css";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Container fluid className="App">
         <NavBar />
         <Container fluid>
-         {/* <ForecasterHome/> */}
+        {/* <ForecasterHome/> */}
         </Container>
         <DataTable/>
       </Container>
