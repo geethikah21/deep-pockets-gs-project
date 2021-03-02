@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { LineGraph } from "../../components/LineGraph";
 
@@ -133,28 +132,22 @@ const investmentCategories =  [
   }
 ]
 
-const ForecasterHome = () => {
-
-  const [tableData, setTableData] = useState(investmentCategories)
-  function updateTableData(index, update) {
-    tableData[index] = update
-    setTableData(tableData)
-  }
-=======
-import React, {useState} from "react";
-import { LineGraph } from "../../components/LineGraph";
-
 const mock = [11506, 13260, 15428, 17959, 21077, 25041, 29787, 34898, 41382, 48824];
 
 const ForecasterHome = () => {
   const [lineGraphData, setLineGraphData] = useState(mock);
+  const [tableData, setTableData] = useState(investmentCategories)
   const fetchForecast = () => {
     // call setLineGraphData on response from fetch
-    fetch('http://example.com/movies.json') // replace this with url for data
+    fetch('http://localhost:3000/api/v1/forecast') // replace this with url for data
     .then(response => response.json())
     .then(data => setLineGraphData(data));
   };
->>>>>>> 8aa4e2717aaa85b8713455d3af58fe09ccebba39
+
+  function updateTableData(index, update) {
+    tableData[index] = update
+    setTableData(tableData)
+  }
 
   return (
     <>
