@@ -7,17 +7,21 @@ const ForecasterHome = () => {
   const [lineGraphData, setLineGraphData] = useState(mock);
   const fetchForecast = () => {
     // call setLineGraphData on response from fetch
-    fetch('http://example.com/movies.json')
+    fetch('http://example.com/movies.json') // replace this with url for data
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => setLineGraphData(data));
   };
 
   return (
     <>
-       <div>
+        <div>
           <h3>Investment Forecaster</h3>
-          <p>Logic goes here</p>
+          <p>This page allows you to customize your investments and view the potential growth of <b>$100,000</b> over a period of <b>10 years</b>.</p>
+          <br></br>
           <LineGraph data={lineGraphData}/>
+          <br></br>
+          <h4>Investment Allocations</h4>
+          <br></br>
         </div>
         
     </>
