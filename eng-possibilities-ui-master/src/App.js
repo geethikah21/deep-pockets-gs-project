@@ -12,7 +12,7 @@ function App() {
       <Container fluid className="App">
         <NavBar />
         <Container fluid>
-         <ForecasterHome/>
+         {/* <ForecasterHome/> */}
         </Container>
         <DataTable/>
       </Container>
