@@ -2,16 +2,30 @@ import React, { Component } from 'react'
 import "./table.css"
 
 class TableInput extends Component{
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+
+        // const node = this.allocation.current
 
         this.state = {
-            sectorPercentage: 0
+            sectorPercentage: null
         }
 
         this.handleChange = this.handleChange.bind(this)
 
     }
+
+    // handleChange(event) {
+    //     const allocation = event.target.value
+    //     this.props.onChange(this.props.id, allocation)
+    // }
+    
+
+    // componentDidUpdate(prevState){
+    //     if (prevState.sectorPercentage != this.state.sectorPercentage){
+    //         this.props.handleAllocation(index, this.s)
+    //     }
+    // }
 
     handleChange(event) {
 
@@ -20,7 +34,12 @@ class TableInput extends Component{
         const value = target.value;
 
         this.setState({
-            [name]:  value
+            sectorPercentage: value,
+            [name]:  value, 
+        }, () => {
+            if (this.props.onChange) {
+                this.props.onChange(this.state)
+            }
         })
     }
 
@@ -30,9 +49,15 @@ class TableInput extends Component{
                 <form className="row-data">
                     <input
                         type="number"
-                        name="sectorPercentage"
+                        name={this.props.category}
                         value={this.state.sectorPercentage}
                         onChange={this.handleChange}
+                        min={10}
+                    />
+                    <input
+                        type="checkbox"
+                        value=""
+                        onChecked={this.handleChange}
                     />
                 </form>
             </div>
