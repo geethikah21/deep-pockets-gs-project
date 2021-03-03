@@ -48,20 +48,20 @@ public class InvestingForecastService {
     public List<Double> getForeCast(Map<String, Double> userRequest, List<InvestmentDetail> details) {
         Map<Integer, Double> totalYearAmount = new HashMap<>();
 
-        for (InvestmentDetail i : details) {
+        for (InvestmentDetail investmentDetail : details) {
             //user input for category i
-            double userInvestmentPercentage = userRequest.get(i.getCategory());
+            double userInvestmentPercentage = userRequest.get(investmentDetail.getCategory());
             double userInvestmentDollars = (userInvestmentPercentage / 100) * 10000;
-            double[] historicalReturns = double[10];
+            double[] historicalReturns = new double[10];
             for (int x = 0; x < 10; x++) {
 
                 //historical interest data for category i in year x
-                double historicalInterest = Double.valueOf(i.getData().get(x));
+                double historicalInterest = Double.valueOf(investmentDetail.getData().get(x));
                 historicalReturns[x] = historicalInterest;
 
             }
                 //get predicted returns based on moving average for past 10 years
-                ArrayList<Double> predictedReturns = movingAveragePrediction(historicalReturns);
+                ArrayList<Double> predictedReturns = (ArrayList<Double>) movingAveragePrediction(historicalReturns);
                 for(int i = 0; i < 10; i++){
                     double currentInterest = (predictedReturns.get(i) / 100) * userInvestmentDollars;
                     userInvestmentDollars = userInvestmentDollars + currentInterest;

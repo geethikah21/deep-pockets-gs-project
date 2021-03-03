@@ -114,26 +114,6 @@ class TableForm extends Component {
         }
     }
 
-    // postOptions() {
-    //     // Simple POST request with a JSON body using fetch
-    //     const data = { username: 'example' };
-
-    //     fetch('http://localhost/8443/array', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify(data),
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       console.log('Success:', data);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error:', error);
-    //     });
-    // }
-
     render() {
         return (
 

@@ -151,19 +151,33 @@ const ForecasterHome = () => {
     setTableData(tableData)
   }
 
-  async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
+  function postData(url = '', data = {}) {
+
+    const options = {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data) 
-    });
-    return JSON.parse(response); 
+      mode: 'cors',
+      body: JSON.stringify(data),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    }
+
+    fetch(url, options)
+    .then(response => response.json())
+    .then(response => console.log(response))
   }
 
   function handleClick(data) {
-    const url= `http:localhost:8443/getdata`
-    const dataJson = JSON.stringify(data)
+
+    const actualData = data
+
+    delete actualData.invalids
+    delete actualData.sum
+    delete actualData.alert
+    delete actualData.seen
+    
+    const url= 'http://localhost:8080/api/v1/forecast'
+    const dataJson = JSON.stringify(actualData)
     console.log(dataJson)
     const response = postData(url, dataJson)
     console.log(response)
