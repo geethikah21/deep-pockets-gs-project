@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LineGraph } from "../../components/LineGraph";
+import DataTable from '../../components/Table/datatable'
 
 const investmentCategories =  [
   {
@@ -159,6 +160,7 @@ const ForecasterHome = () => {
           <br></br>
           <h4>Investment Allocations</h4>
           <br></br>
+          <DataTable />
         </div>
         
     </>
