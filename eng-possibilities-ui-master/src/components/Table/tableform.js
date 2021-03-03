@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import './table.css'
+import InfoIcon from '@material-ui/icons/Info'
+import Alert from '@material-ui/lab/Alert';
+import SimpleModal from "./simplemodal";
+import TablePopup from "./tablepopup";
+import { Modal } from '@material-ui/core';
 
 class TableForm extends Component {
     constructor() {
@@ -10,7 +14,22 @@ class TableForm extends Component {
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
         
+        this.stateMins = {
+            energy: 5,
+            financial: 4,
+            estate: 15,
+            technology: 6,
+            pharmaceuticals: 10,
+            airline: 10,
+            retail: 10,
+            gaming: 12
+        }
+
+
         this.state = {
+            alert: false,
+            seen: false,
+            invalids: [],
             energy: null,
             financial: null,
             estate: null,
@@ -29,28 +48,98 @@ class TableForm extends Component {
         const value = target.value;
 
         this.setState({
-            [name]:  value, 
+            ...this.state,
+            [name]:  Number(value), 
         })
+    }
+
+    togglePop = () => {
+        console.log("state changed")
+        this.setState({
+           ...this.state,
+          seen: !this.state.seen
+        })
+    }
+
+    isValid = (value, min, max) =>
+    value !== '' &&
+    value !== '-' &&
+    value !== null &&
+    (min === undefined || value >= min) &&
+    (max === undefined || value <= max);
+
+    checkStateValidity(states) {
+        var stateWithErrors = []
+        var sum = 0 
+        const toSkip = ['seen', 'name', 'invalids', 'sum']
+        for (const property in states) {
+
+            if (toSkip.includes(property)) {
+                continue
+            }
+
+            console.log(property)
+
+            sum += states[property]
+            console.log(sum)
+            if (!this.isValid(states[property], this.stateMins[property], 100)) {
+                stateWithErrors.push(property)
+            }
+            console.log(stateWithErrors);
+          }
+        
+        
+        return [stateWithErrors, sum]
     }
 
     handleClick(event) {
 
-        const target = event.target;
-        const name = target.name;
-        const value = target.value;
+        const {name, value, min} = event.target
+        console.log(this.state)
 
-        this.setState({
-        }, () => {
-            if (this.props.onClick) {
-                this.props.onClick(this.state)
-            }
-        })
+        const [invalidStates, totalAllocation] = this.checkStateValidity(this.state)
+    
+        console.log(invalidStates)
+
+        if (invalidStates.length === 0 && totalAllocation <= 100) {
+            console.log("valid")
+            this.setState({
+                ...this.state,
+                alert: false,
+                sum: 0
+            }, () => {
+                if (this.props.onClick) {
+                    this.props.onClick(this.state)
+                }
+            })
+        } else {
+            this.setState({
+                ...this.state,
+                alert: true,
+                invalids: invalidStates
+            })
+        }
     }
-
 
     render() {
         return (
-            <div>
+
+            <div className="input-container">
+                <div>
+                    <div className="btn" onClick={this.togglePop}>
+                    <button>Info</button>
+                    </div>
+                    {this.state.seen ? 
+                        <SimpleModal/>
+                    : null}
+                </div>
+
+                {this.state.alert ? 
+                <Alert severity="info">
+                    {this.state.invalids.join(', ')} are below the threshold— 
+                    <strong>Please change!</strong>
+                </Alert> 
+                : null}
             <div className="table-form">
                 <form autoComplete="off">
                     <label>
@@ -93,6 +182,8 @@ class TableForm extends Component {
                             min="15"/>
                     </label>
                     <br />
+                    </form>
+                    <form>
                     <label>
                         Pharmaceuticals:
                         <input
@@ -140,7 +231,7 @@ class TableForm extends Component {
                     color="primary"
                     onClick={this.handleClick}
                 >
-                                    Submit
+                    Submit
                 </Button>   
             </div>
         )

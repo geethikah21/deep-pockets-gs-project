@@ -3,6 +3,7 @@ import {DataGrid} from '@material-ui/data-grid'
 import "./table.css"
 import TableInput from './tableinput'
 import TableForm from './tableform'
+import fetchData from './utils'
 
 const investmentCategories =  [
   {
@@ -135,10 +136,6 @@ const investmentCategories =  [
   }
 ]
 
-const response = [["114","13260", "15428", "3","56","66","42","456","32","621"],
-["114","13260", "15428", "3","56","66","42","456","32","621"],
-["114","13260", "15428", "3","56","66","42","456","32","621"],
-]
 
 var arrayy = [[1, 2, 3], [2, 4, 5]]
 
@@ -172,56 +169,57 @@ class TableSection extends Component {
         this.handleClick = this.handleClick.bind(this)
 
         this.state = {        
+
+            response: [],
         
             allocation: [],
 
             category: "energy",
 
-            rows:  [
-                {id: 1, category: "Energy", year_one: response[0]},
-                {id: 2, category: "Technology",  year_one: response[1]},
-                {id: 3, category: "Financial Services",  year_one: response[2]},
-                {id: 4, category: "Real Estate",  year_one: response[3]},
-                {id: 5, category: "Pharmaceuticals",  year_one: response[4]},
-                {id: 6, category: "Airline",  year_one: response[5]},
-                {id: 7, category: "Retail",  year_one: response[6]},
-                {id: 8, category: "Gaming",  year_one: response[7]}
-            ],
+            // rows:  [
+            //     {id: 1, category: "Energy", year_one: response[0]},
+            //     {id: 2, category: "Technology",  year_one: response[1]},
+            //     {id: 3, category: "Financial Services",  year_one: response[2]},
+            //     {id: 4, category: "Real Estate",  year_one: response[3]},
+            //     {id: 5, category: "Pharmaceuticals",  year_one: response[4]},
+            //     {id: 6, category: "Airline",  year_one: response[5]},
+            //     {id: 7, category: "Retail",  year_one: response[6]},
+            //     {id: 8, category: "Gaming",  year_one: response[7]}
+            // ],
             
-            columns:  [
-                { field: 'category', headerName: 'Category', width: 150},
-                { field: 'year_one', headerName: 'Year One', width: 150},
-                { field: 'year_two', headerName: 'Year Two', width: 150},
-                { field: 'year_three', headerName: 'Year Three', width: 150},
-                { field: 'year_four', headerName: 'Year Four', width: 150},
-                { field: 'year_five', headerName: 'Year Five', width: 150},
-                { field: 'year_six', headerName: 'Year Six', width: 150},
-                { field: 'year_seven', headerName: 'Year Seven', width: 150},
-                { field: 'year_eight', headerName: 'Year Eight', width: 150},
-                { field: 'year_nine', headerName: 'Year Nine', width: 150},
-                { field: 'year_ten', headerName: 'Year Ten', width: 150},
+            // columns:  [
+            //     { field: 'category', headerName: 'Category', width: 150},
+            //     { field: 'year_one', headerName: 'Year One', width: 150},
+            //     { field: 'year_two', headerName: 'Year Two', width: 150},
+            //     { field: 'year_three', headerName: 'Year Three', width: 150},
+            //     { field: 'year_four', headerName: 'Year Four', width: 150},
+            //     { field: 'year_five', headerName: 'Year Five', width: 150},
+            //     { field: 'year_six', headerName: 'Year Six', width: 150},
+            //     { field: 'year_seven', headerName: 'Year Seven', width: 150},
+            //     { field: 'year_eight', headerName: 'Year Eight', width: 150},
+            //     { field: 'year_nine', headerName: 'Year Nine', width: 150},
+            //     { field: 'year_ten', headerName: 'Year Ten', width: 150},
             //     {field: 'percentage', headerName: 'Percentage',
             //     renderCell: (params) => (
             //         <TableInput />
             //       ),
             //     width: 150
             // },
-            ]
         }
     }
 
 
-    // componentDidMount() {
-    //     fetch('http://localhost:8443/data')
-    //     .then(res => res.json())
-    //     .then((data) => {
-    //         // this.setState({
-    //         //     userData: data
-    //         // })
-    //         console.log(data)
-    //     })
-    //     .catch(console.log)
-    //   }
+    componentDidMount() {
+        fetchData(true)
+        .then((response) => {
+            console.log(response.data)
+            // this.setState({
+            //   ...this.state,
+            //   response: data
+            // })
+        })
+        .catch(console.log)
+      }
 
     // getPercentage = data => this.setState({
     //     [this.state.percentage]: data
@@ -263,11 +261,6 @@ class TableSection extends Component {
             { field: 'year_eight', headerName: 'Year Eight', width: 150},
             { field: 'year_nine', headerName: 'Year Nine', width: 150},
             { field: 'year_ten', headerName: 'Year Ten', width: 150},
-            { field: "percentage", headerName: "Percentage", width: 150,
-            renderCell: (params) => (
-                        <TableInput category={this.state.category} onChange={this.handleChange}/>
-                      )
-                }
         ]
 
         const rows = investmentCategories.map((value, index) => {
@@ -284,7 +277,6 @@ class TableSection extends Component {
                 "year_eight": value.data[7],
                 "year_nine": value.data[8],
                 "year_ten": value.data[9],
-                "percentage": 0
             }
         })
 
