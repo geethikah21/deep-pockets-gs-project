@@ -78,15 +78,14 @@ class TableForm extends Component {
                 continue
             }
 
-            console.log(property)
 
             sum += states[property]
-            console.log(sum)
+
             if (!this.isValid(states[property], this.stateMins[property], 100)) {
                 stateWithErrors.push(property)
             }
-            console.log(stateWithErrors);
-          }
+
+        }
         
         
         return [stateWithErrors, sum]
@@ -95,11 +94,9 @@ class TableForm extends Component {
     handleClick(event) {
 
         const {name, value, min} = event.target
-        console.log(this.state)
 
         const [invalidStates, totalAllocation] = this.checkStateValidity(this.state)
     
-        console.log(invalidStates)
 
         if (invalidStates.length === 0 && totalAllocation <= 100) {
             console.log("valid")
@@ -109,6 +106,7 @@ class TableForm extends Component {
                 sum: 0
             }, () => {
                 if (this.props.onClick) {
+                    console.log(this.state)
                     this.props.onClick(this.state)
                 }
             })

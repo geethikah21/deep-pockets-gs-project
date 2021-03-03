@@ -213,10 +213,10 @@ class TableSection extends Component {
         fetchData(true)
         .then((response) => {
             console.log(response.data)
-            // this.setState({
-            //   ...this.state,
-            //   response: data
-            // })
+            this.setState({
+              ...this.state,
+              response: response.data
+            })
         })
         .catch(console.log)
       }

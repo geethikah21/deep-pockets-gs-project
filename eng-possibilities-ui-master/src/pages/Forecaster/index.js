@@ -140,9 +140,8 @@ const ForecasterHome = () => {
   const [tableData, setTableData] = useState(investmentCategories)
   const fetchForecast = () => {
     // call setLineGraphData on response from fetch
-    fetch('http://localhost:3000/api/v1/forecast') // replace this with url for data
-    .then(response => response.json())
-    .then(data => setLineGraphData(data));
+    const response = fetch('http://localhost:8080/api/v1/forecast') // replace this with url for data
+    console.log(response.json());
   };
 
   function updateTableData(index, update) {
@@ -154,7 +153,7 @@ const ForecasterHome = () => {
     <>
         <div>
           <h3>Investment Forecaster</h3>
-          <p>This page allows you to customize your investments and view the potential growth of <b>$100,000</b> over a period of <b>10 years</b>.</p>
+          <p>This page allows you to customize your investments and view the potential growth of <b>$10,000</b> over a period of <b>10 years</b>.</p>
           <br></br>
           <LineGraph data={lineGraphData}/>
           <br></br>

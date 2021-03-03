@@ -14,19 +14,7 @@ class TableInput extends Component{
         this.handleChange = this.handleChange.bind(this)
 
     }
-
-    // handleChange(event) {
-    //     const allocation = event.target.value
-    //     this.props.onChange(this.props.id, allocation)
-    // }
     
-
-    // componentDidUpdate(prevState){
-    //     if (prevState.sectorPercentage != this.state.sectorPercentage){
-    //         this.props.handleAllocation(index, this.s)
-    //     }
-    // }
-
     handleChange(event) {
 
         const target = event.target;
