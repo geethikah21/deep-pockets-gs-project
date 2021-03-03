@@ -78,7 +78,6 @@ class TableForm extends Component {
                 continue
             }
 
-
             sum += states[property]
             if (!this.isValid(states[property], this.stateMins[property], 100)) {
                 stateWithErrors.push(property)
@@ -117,6 +116,26 @@ class TableForm extends Component {
         }
     }
 
+    // postOptions() {
+    //     // Simple POST request with a JSON body using fetch
+    //     const data = { username: 'example' };
+
+    //     fetch('http://localhost/8443/array', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(data),
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       console.log('Success:', data);
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error:', error);
+    //     });
+    // }
+
     render() {
         return (
 
@@ -132,8 +151,10 @@ class TableForm extends Component {
 
                 {this.state.alert ? 
                 <Alert severity="info">
-                    {this.state.invalids.join(', ')} are below the threshold— 
-                    <strong>Please change!</strong>
+                    {(this.state.invalids.map(value => 
+                    value[0].toUpperCase() + value.substring(1)))
+                    .join(', ')} are below the threshold— 
+                    <strong>Check info for minimum values!</strong>
                 </Alert> 
                 : null}
             <div className="table-form">
