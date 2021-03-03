@@ -84,7 +84,6 @@ class TableForm extends Component {
             }
           }
         
-        
         return [stateWithErrors, sum]
     }
 
@@ -93,7 +92,6 @@ class TableForm extends Component {
         const {name, value, min} = event.target
 
         const [invalidStates, totalAllocation] = this.checkStateValidity(this.state)
-
 
         if (invalidStates.length === 0 && totalAllocation <= 100) {
             console.log("valid")
