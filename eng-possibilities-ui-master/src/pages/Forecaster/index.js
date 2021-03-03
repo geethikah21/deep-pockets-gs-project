@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { LineGraph } from "../../components/LineGraph";
-import DataTable from '../../components/Table/datatable'
+import TableSection from '../../components/Table/tablesection'
+import TableForm from '../../components/Table/tableform'
+import fetchData from "../../components/Table/utils";
 
 const investmentCategories =  [
   {
@@ -149,6 +151,24 @@ const ForecasterHome = () => {
     setTableData(tableData)
   }
 
+  async function postData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data) 
+    });
+    return JSON.parse(response); 
+  }
+
+  function handleClick(data) {
+    const url= `http:localhost:8443/getdata`
+    const dataJson = JSON.stringify(data)
+    console.log(dataJson)
+    const response = postData(url, dataJson)
+    console.log(response)
+  }
+
   return (
     <>
         <div>
@@ -159,7 +179,8 @@ const ForecasterHome = () => {
           <br></br>
           <h4>Investment Allocations</h4>
           <br></br>
-          <DataTable />
+          <TableSection />
+          <TableForm onClick={handleClick}/>
         </div>
         
     </>

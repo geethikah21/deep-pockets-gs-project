@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {DataGrid} from '@material-ui/data-grid'
 import "./table.css"
 import TableInput from './tableinput'
-import TableForm from './tableform'
 import fetchData from './utils'
 
 const investmentCategories =  [
@@ -166,7 +165,7 @@ class TableSection extends Component {
 
 
         this.handleChange = this.handleChange.bind(this)
-        this.handleClick = this.handleClick.bind(this)
+        // this.handleClick = this.handleClick.bind(this)
 
         this.state = {        
 
@@ -175,36 +174,6 @@ class TableSection extends Component {
             allocation: [],
 
             category: "energy",
-
-            // rows:  [
-            //     {id: 1, category: "Energy", year_one: response[0]},
-            //     {id: 2, category: "Technology",  year_one: response[1]},
-            //     {id: 3, category: "Financial Services",  year_one: response[2]},
-            //     {id: 4, category: "Real Estate",  year_one: response[3]},
-            //     {id: 5, category: "Pharmaceuticals",  year_one: response[4]},
-            //     {id: 6, category: "Airline",  year_one: response[5]},
-            //     {id: 7, category: "Retail",  year_one: response[6]},
-            //     {id: 8, category: "Gaming",  year_one: response[7]}
-            // ],
-            
-            // columns:  [
-            //     { field: 'category', headerName: 'Category', width: 150},
-            //     { field: 'year_one', headerName: 'Year One', width: 150},
-            //     { field: 'year_two', headerName: 'Year Two', width: 150},
-            //     { field: 'year_three', headerName: 'Year Three', width: 150},
-            //     { field: 'year_four', headerName: 'Year Four', width: 150},
-            //     { field: 'year_five', headerName: 'Year Five', width: 150},
-            //     { field: 'year_six', headerName: 'Year Six', width: 150},
-            //     { field: 'year_seven', headerName: 'Year Seven', width: 150},
-            //     { field: 'year_eight', headerName: 'Year Eight', width: 150},
-            //     { field: 'year_nine', headerName: 'Year Nine', width: 150},
-            //     { field: 'year_ten', headerName: 'Year Ten', width: 150},
-            //     {field: 'percentage', headerName: 'Percentage',
-            //     renderCell: (params) => (
-            //         <TableInput />
-            //       ),
-            //     width: 150
-            // },
         }
     }
 
@@ -221,21 +190,6 @@ class TableSection extends Component {
         .catch(console.log)
       }
 
-    // getPercentage = data => this.setState({
-    //     [this.state.percentage]: data
-    // }, console.log(this.state.percentage)
-    // )
-
-    // handleClick(
-    //     //post to server
-    // )
-    
-    // handleChange(name, value) {
-    //     this.setState(prevState => {
-    //         newState: prevState.push(name, value)
-    //     })
-    // }
-
     handleChange(data) {
       this.setState(prevState => {
         allocation: prevState.allocation.push(data)
@@ -243,9 +197,9 @@ class TableSection extends Component {
       console.log(data)
     }
 
-    handleClick(data) {
-      console.log(data)
-    }
+    // handleClick(data) {
+    //   console.log(data)
+    // }
 
     render() {
 
@@ -284,7 +238,7 @@ class TableSection extends Component {
             <div style={{ display: 'flex', height: '100%' }} className="table-section">
                 <div style={{ flexGrow: 1 }}>
                     <DataGrid autoHeight rows={rows} columns={columns}/>
-                    <TableForm onClick={this.handleClick}/>
+                    {/* <TableForm onClick={this.handleClick}/> */}
                 </div>
             </div>
 
