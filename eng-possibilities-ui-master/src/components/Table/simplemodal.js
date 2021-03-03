@@ -1,5 +1,5 @@
 import React from "react";
-import './modal.css'
+
 export default class SimpleModal extends React.Component {
   render() {
     return (

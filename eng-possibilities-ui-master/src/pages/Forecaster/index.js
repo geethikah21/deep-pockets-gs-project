@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import React, {useState} from "react";
-import { LineGraph } from "../../components/LineGraph";
-import DataTable from '../../components/Table/datatable'
-=======
 import React, { useState } from "react";
 import { LineGraph } from "../../components/LineGraph";
+import DataTable from '../../components/Table/datatable'
 
 const investmentCategories =  [
   {
@@ -136,7 +132,6 @@ const investmentCategories =  [
     ]
   }
 ]
->>>>>>> 6ec5567e5c5d99f9f2313ab2a92ceb5c6dbd5381
 
 const mock = [11506, 13260, 15428, 17959, 21077, 25041, 29787, 34898, 41382, 48824];
 
@@ -149,30 +144,23 @@ const ForecasterHome = () => {
     .then(response => response.json())
     .then(data => setLineGraphData(data));
   };
-<<<<<<< HEAD
-=======
 
   function updateTableData(index, update) {
     tableData[index] = update
     setTableData(tableData)
   }
->>>>>>> 6ec5567e5c5d99f9f2313ab2a92ceb5c6dbd5381
 
   return (
     <>
         <div>
           <h3>Investment Forecaster</h3>
-<<<<<<< HEAD
-          <LineGraph data={lineGraphData}/>
-          <DataTable/>
-=======
           <p>This page allows you to customize your investments and view the potential growth of <b>$100,000</b> over a period of <b>10 years</b>.</p>
           <br></br>
           <LineGraph data={lineGraphData}/>
           <br></br>
           <h4>Investment Allocations</h4>
           <br></br>
->>>>>>> 6ec5567e5c5d99f9f2313ab2a92ceb5c6dbd5381
+          <DataTable />
         </div>
         
     </>
