@@ -1,0 +1,59 @@
+.table-section{
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+}
+
+.table-input{
+    flex-basis: 20%;
+}
+
+.data-table{
+    display: flex; 
+    flex-direction: row;
+
+}
+
+.table-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-form form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.table-form input{
+    display: flex;
+}
+
+.modal {
+    position: 'absolute';
+    width: 400;
+    background-color: #ddd;
+    border: '2px solid #000';
+    padding: 20px
+  }
+
+.modal_content {
+    background-color: white;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+button {
+  border-radius: 10px;
+  background-color: grey;
+  outline: none;
+}
+
+button:hover {
+  background-color: white;
+}

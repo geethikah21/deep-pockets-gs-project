@@ -2,7 +2,6 @@ import { Container } from "react-bootstrap";
 
 import NavBar from "./components/NavBar";
 import ForecasterHome from './pages/Forecaster'
-
 import "./App.css";
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
       <Container fluid className="App">
         <NavBar />
         <Container fluid>
-         <ForecasterHome/>
+        <ForecasterHome/>
         </Container>
       </Container>
     </div>
